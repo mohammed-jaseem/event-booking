@@ -1,0 +1,63 @@
+{% extends 'base/web-base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+{% include 'include/header.html' %}
+
+
+<main class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
+    <h2 class="text-3xl font-semibold mb-6 text-center">Book Your Event</h2>
+    <form id="bookingForm" class="space-y-6">
+        <div>
+            <label for="eventName" class="block text-lg font-medium">Event Name</label>
+            <input type="text" id="eventName" name="eventName" class="w-full p-3 border rounded-lg" placeholder="Enter event name" required>
+        </div>
+
+        <div>
+            <label for="eventDate" class="block text-lg font-medium">Event Date</label>
+            <input type="date" id="eventDate" name="eventDate" class="w-full p-3 border rounded-lg" required>
+        </div>
+
+        <div>
+            <label for="tickets" class="block text-lg font-medium">Number of Tickets</label>
+            <input type="number" id="tickets" name="tickets" class="w-full p-3 border rounded-lg" min="1" placeholder="Enter number of tickets" required>
+        </div>
+
+        <div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
+                Book Now
+            </button>
+        </div>
+    </form>
+</main>
+
+<div id="successMessage" class="hidden container mx-auto text-center p-5 bg-green-500 text-white rounded-lg shadow-md">
+    Your booking is confirmed!
+</div>
+
+<script src="script.js"></script>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const eventName = document.getElementById('eventName').value;
+    const eventDate = document.getElementById('eventDate').value;
+    const tickets = document.getElementById('tickets').value;
+
+    if (eventName && eventDate && tickets > 0) {
+
+        document.getElementById('successMessage').classList.remove('hidden');
+        setTimeout(() => {
+            document.getElementById('successMessage').classList.add('hidden');
+        }, 5000);
+
+        document.getElementById('bookingForm').reset();
+    }
+});
+</script>
+
+    
+{% endblock %}
