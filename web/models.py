@@ -17,6 +17,8 @@ class Event(models.Model):
     image = models.ImageField(upload_to="booking_event")
     name = models.CharField(max_length=225)
 
+    
+
     class Meta:
         db_table = "event"
         verbose_name = "event"
@@ -31,6 +33,8 @@ class Tip(models.Model):
     title = models.CharField(max_length=225)
     name = models.CharField(max_length=225)
     short_description = models.CharField(max_length=255)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
 
     class Meta:
         db_table = "tip"
