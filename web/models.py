@@ -44,3 +44,20 @@ class Tip(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Category(models.Model):
+    image = models.ImageField(upload_to="category")
+    title = models.CharField(max_length=225)
+    name = models.CharField(max_length=225)
+    short_description = models.CharField(max_length=255)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+
+    class Meta:
+        db_table = "category"
+        verbose_name = "category"
+        verbose_name_plural = "categories"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.title

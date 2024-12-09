@@ -8,24 +8,225 @@
 
 
 <div>
-    <section class="wrapper flex justify-between flex-wrap gap-6">
-            <div class="flex flex-col md:flex-row w-full h-[300px] overflow-hidden bg-red-500 text-white">
-                {% for tip in tips %}
-                <div class="flex flex-col justify-center items-start p-8 w-full md:w-1/2">
-                    <h3 class="text-[50px] font-bold mb-3">{{ tip.title }}</h3>
-                    <h4 class="mb-3 font-[600] text-[20px]">{{ tip.name }}</h4>
-                    <p class="text-[14px]">{{ tip.short_description }}</p>
-                    <a href="">
-                        <button class="w-full bg-blue-600 text-white p-3 mt-[20px] rounded-lg hover:bg-blue-700 transition">
-                            Book Now
-                        </button>
-                    </a>
-                </div>
-                <div class="flex justify-end  md:w-1/2">
-                    <img src="{{ tip.image.url }}" alt="image" class=" w-[80%] h-full">
-                </div>
-                {% endfor %}
+    <section class="wrapper flex flex-wrap gap-6">
+        <div class="flex flex-col md:flex-row w-full h-auto md:h-[300px] overflow-hidden bg-red-500 text-white rounded-lg shadow-lg">
+            {% for tip in tips %}
+            <!-- Text Content -->
+            <div class="flex flex-col justify-center items-start p-8 w-full md:w-1/2 space-y-3">
+                <h3 class="text-[30px] md:text-[50px] font-bold mb-3">{{ tip.title }}</h3>
+                <h4 class="text-[16px] md:text-[20px] font-[600]">{{ tip.name }}</h4>
+                <p class="text-[14px]">{{ tip.short_description }}</p>
+                <a href="{% url 'web:booking' %}">
+                    <button class="w-full md:w-auto bg-blue-600 text-white px-4 py-3 mt-3 rounded-lg hover:bg-blue-700 transition">
+                        Book Now
+                    </button>
+                </a>
             </div>
+            <!-- Image Content -->
+            <div class="flex justify-center md:justify-end w-full md:w-1/2">
+                <img src="{{ tip.image.url }}" alt="image" class="w-full md:w-[80%] h-[200px] md:h-full object-cover rounded-lg">
+            </div>
+            {% endfor %}
+        </div>
     </section>
 </div>
+
+<div class="w-full max-w-4xl mt-[20px] px-5">
+    <div class="flex items-center space-x-4">
+      <!-- Location Dropdown -->
+      <div class="relative w-full max-w-xs">
+        <button id="locationBtn" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-left focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          Select location
+        </button>
+        <ul id="locationMenu" class="absolute hidden mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-md">
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">New York</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">London</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Tokyo</li>
+          <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-2">
+            <span class="material-icons">play_arrow</span> 
+            <span>Browse online events</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Date Dropdown -->
+      <div class="relative">
+        <button id="dateBtn" class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-left focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          Date
+        </button>
+        <input type="date" id="datePicker" class="absolute top-0 left-0 w-full opacity-0 cursor-pointer">
+      </div>
+    </div>
+  </div>
+
+  <div class="my-6 mt-[150px] mb-[150px]">
+    <!-- Title -->
+    <h2 class="text-lg md:text-2xl font-bold text-gray-900 mb-[30px] px-4">
+        Performing & Visual Arts event time options
+    </h2>
+
+    <!-- Scrollable Menu -->
+    <div class="w-full overflow-x-auto scrollbar-hide flex gap-4 px-4 py-4 bg-gray-50 rounded-lg shadow">
+        <!-- Single Card -->
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">Today</p>
+        </div>
+
+        <!-- Repeated Cards -->
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">Tomorrow</p>
+        </div>
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">This weekend</p>
+        </div>
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">This week</p>
+        </div>
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">Next week</p>
+        </div>
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">This Month</p>
+        </div>
+        <div class="flex-shrink-0 w-[350px] h-[150px] bg-white rounded-lg shadow-sm flex flex-col justify-center items-center space-y-2">
+            <div class="text-blue-500 text-2xl">
+                <i class="bx bx-time"></i>
+            </div>
+            <p class="text-blue-600 font-medium">Next week</p>
+        </div>
+    </div>
+</div>
+
+<!-- Add Tailwind CSS for styling -->
+<style>
+    /* Optional: Hide scrollbar for a cleaner design */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* Internet Explorer 10+ */
+        scrollbar-width: none; /* Firefox */
+    }
+</style>
+
+
+  <script>
+    // JavaScript for Dropdown Interaction
+    const locationBtn = document.getElementById('locationBtn');
+    const locationMenu = document.getElementById('locationMenu');
+    const locationItems = locationMenu.querySelectorAll('li');
+
+    locationBtn.addEventListener('click', () => {
+      locationMenu.classList.toggle('hidden');
+    });
+
+    locationItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        locationBtn.textContent = item.textContent;
+        locationMenu.classList.add('hidden');
+      });
+    });
+
+    // Date Picker Interaction
+    const dateBtn = document.getElementById('dateBtn');
+    const datePicker = document.getElementById('datePicker');
+
+    datePicker.addEventListener('change', () => {
+      const selectedDate = new Date(datePicker.value).toLocaleDateString();
+      dateBtn.textContent = selectedDate || 'Date';
+    });
+  </script>
+
+<footer class="bg-purple-900 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Use Eventbrite Column -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Use Eventbrite</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Create Events</a></li>
+          <li><a href="#" class="hover:underline">Pricing</a></li>
+          <li><a href="#" class="hover:underline">Event Marketing Platform</a></li>
+          <li><a href="#" class="hover:underline">Eventbrite Mobile Ticket App</a></li>
+          <li><a href="#" class="hover:underline">Eventbrite Check-In App</a></li>
+          <li><a href="#" class="hover:underline">Event Registration Software</a></li>
+          <li><a href="#" class="hover:underline">Community Guidelines</a></li>
+          <li><a href="#" class="hover:underline">FAQs</a></li>
+          <li><a href="#" class="hover:underline">Sitemap</a></li>
+        </ul>
+      </div>
+  
+      <!-- Plan Events Column -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Plan Events</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Sell Tickets Online</a></li>
+          <li><a href="#" class="hover:underline">Event Planning</a></li>
+          <li><a href="#" class="hover:underline">Sell Concert Tickets Online</a></li>
+          <li><a href="#" class="hover:underline">Event Payment System</a></li>
+          <li><a href="#" class="hover:underline">Solutions for Professional Services</a></li>
+          <li><a href="#" class="hover:underline">Halloween Party Planning</a></li>
+          <li><a href="#" class="hover:underline">Virtual Events Platform</a></li>
+          <li><a href="#" class="hover:underline">QR Codes for Event Check-In</a></li>
+        </ul>
+      </div>
+  
+      <!-- Find Events Column -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Find Events</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">New Orleans Food & Drink Events</a></li>
+          <li><a href="#" class="hover:underline">San Francisco Holiday Events</a></li>
+          <li><a href="#" class="hover:underline">Tulum Music Events</a></li>
+          <li><a href="#" class="hover:underline">Denver Hobby Events</a></li>
+          <li><a href="#" class="hover:underline">Atlanta Pop Music Events</a></li>
+          <li><a href="#" class="hover:underline">New York Events</a></li>
+          <li><a href="#" class="hover:underline">Chicago Events</a></li>
+          <li><a href="#" class="hover:underline">Washington Events</a></li>
+        </ul>
+      </div>
+  
+      <!-- Connect With Us Column -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:underline">Contact Support</a></li>
+          <li><a href="#" class="hover:underline">Contact Sales</a></li>
+          <li><a href="#" class="hover:underline">Facebook</a></li>
+          <li><a href="#" class="hover:underline">LinkedIn</a></li>
+          <li><a href="#" class="hover:underline">Instagram</a></li>
+          <li><a href="#" class="hover:underline">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="mt-8 text-center border-t border-purple-700 pt-4 text-sm">
+      <p>© 2024 Eventbrite</p>
+      <p>
+        <a href="#" class="hover:underline">About</a> · 
+        <a href="#" class="hover:underline">Careers</a> · 
+        <a href="#" class="hover:underline">Terms</a> · 
+        <a href="#" class="hover:underline">Privacy</a>
+      </p>
+    </div>
+  </footer>
+  
+
 {% endblock %}

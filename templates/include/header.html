@@ -1,20 +1,62 @@
 {% load static %}
-
-<header class="flex justify-between px-5 py-5 border-b-[1px]">
-    <h1 class="text-red-500 text-[25px] font-[700]">eventbrite</h1>
-    <ul>
-        <li class="px-7 py-1 rounded-3xl bg-slate-100 border">
-            <i class='bx bx-search-alt-2 text-[20px]'></i>
-            <input type="text" placeholder="Search events" class="outline-none px-7 py-2 rounded-3xl bg-slate-100">
-        </li>
-    </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+</head>
+<body>
+    <header class="flex flex-wrap items-center justify-between px-5 py-5 border-b-[1px] relative">
+        <!-- Logo -->
+        <h1 class="text-red-500 text-[25px] font-[700]">eventbrite</h1>
     
-    <ul class="flex justify-between space-x-5">
-        <li class="font-[600]">Find Events</li>
-        <li class="font-[600]">Find Events</li>
-        <li class="font-[600]">Help Center</li>
-        <li class="font-[600]">Find my tickets</li>
-        <li class="font-[600]">Log In</li>
-        <li class="font-[600]">Sign Up</li>
-    </ul>
-</header>
+        <!-- Search Bar -->
+        <ul class="hidden md:flex items-center">
+            <li class="px-7 py-1 rounded-3xl bg-slate-100 border flex items-center">
+                <i class='bx bx-search-alt-2 text-[20px]'></i>
+                <input 
+                    type="text" 
+                    placeholder="Search events" 
+                    class="outline-none px-4 py-2 rounded-3xl bg-slate-100 w-[200px] md:w-[300px]">
+            </li>
+        </ul>
+    
+        <!-- Desktop Navigation -->
+        <ul class="hidden md:flex items-center space-x-5">
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find Events</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Help Center</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find my tickets</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Log In</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Sign Up</li>
+        </ul>
+    
+        <!-- Hamburger Menu -->
+        <button id="menuToggle" class="block md:hidden text-[25px]">
+            <i class="bx bx-menu"></i>
+        </button>
+    
+        <!-- Mobile Menu -->
+        <ul id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-lg hidden flex-col space-y-4 px-5 py-5 md:hidden z-10">
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find Events</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Help Center</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find my tickets</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Log In</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Sign Up</li>
+        </ul>
+    </header>
+    
+    <script>
+        // JavaScript for toggling mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+    
+        menuToggle.addEventListener('click', () => {
+            console.log('menuToggle clicked');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+    
+</body>
+</html>
