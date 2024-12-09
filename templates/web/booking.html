@@ -6,10 +6,24 @@
 
 {% include 'include/header.html' %}
 
-
 <main class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
     <h2 class="text-3xl font-semibold mb-6 text-center">Book Your Event</h2>
     <form id="bookingForm" class="space-y-6">
+        <div>
+            <label for="userName" class="block text-lg font-medium">Your Name</label>
+            <input type="text" id="userName" name="userName" class="w-full p-3 border rounded-lg" placeholder="Enter your name" required>
+        </div>
+
+        <div>
+            <label for="userPhone" class="block text-lg font-medium">Phone Number</label>
+            <input type="tel" id="userPhone" name="userPhone" class="w-full p-3 border rounded-lg" placeholder="Enter your phone number" required>
+        </div>
+
+        <div>
+            <label for="userPlace" class="block text-lg font-medium">Place</label>
+            <input type="text" id="userPlace" name="userPlace" class="w-full p-3 border rounded-lg" placeholder="Enter your place" required>
+        </div>
+
         <div>
             <label for="eventName" class="block text-lg font-medium">Event Name</label>
             <input type="text" id="eventName" name="eventName" class="w-full p-3 border rounded-lg" placeholder="Enter event name" required>
@@ -37,26 +51,26 @@
     Your booking is confirmed!
 </div>
 
-
 <script>
     document.getElementById('bookingForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    const eventName = document.getElementById('eventName').value;
-    const eventDate = document.getElementById('eventDate').value;
-    const tickets = document.getElementById('tickets').value;
+        const userName = document.getElementById('userName').value;
+        const userPhone = document.getElementById('userPhone').value;
+        const userPlace = document.getElementById('userPlace').value;
+        const eventName = document.getElementById('eventName').value;
+        const eventDate = document.getElementById('eventDate').value;
+        const tickets = document.getElementById('tickets').value;
 
-    if (eventName && eventDate && tickets > 0) {
+        if (userName && userPhone && userPlace && eventName && eventDate && tickets > 0) {
+            document.getElementById('successMessage').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('successMessage').classList.add('hidden');
+            }, 5000);
 
-        document.getElementById('successMessage').classList.remove('hidden');
-        setTimeout(() => {
-            document.getElementById('successMessage').classList.add('hidden');
-        }, 5000);
-
-        document.getElementById('bookingForm').reset();
-    }
-});
+            document.getElementById('bookingForm').reset();
+        }
+    });
 </script>
 
-    
 {% endblock %}

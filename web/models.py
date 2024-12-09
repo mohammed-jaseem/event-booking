@@ -1,4 +1,18 @@
 from django.db import models
+from users.models import User
+
+
+class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "customer_customer"
+        verbose_name = "customer"
+        verbose_name_plural = "customers"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.user.email
 
 class Slider(models.Model):
     image = models.ImageField(upload_to="booking_slider")
@@ -46,11 +60,12 @@ class Tip(models.Model):
         return self.title
     
 class Category(models.Model):
-    image = models.ImageField(upload_to="category")
-    title = models.CharField(max_length=225)
     name = models.CharField(max_length=225)
-    short_description = models.CharField(max_length=255)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    phone = models.IntegerField()
+    place = models.CharField(max_length=225)
+    evant_name = models.CharField(max_length=225)
+    date_time = models.DateTimeField()
+    tickets = models.ForeignKey(Event, on_delete=models.CASCADE)
 
 
     class Meta:
@@ -60,4 +75,4 @@ class Category(models.Model):
         ordering = ["-id"]
 
     def __str__(self):
-        return self.title
+        return self.name
