@@ -25,9 +25,15 @@
     
         <!-- Desktop Navigation -->
         <ul class="hidden md:flex items-center space-x-5">
-            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find Events</li>
-            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Help Center</li>
-            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find my tickets</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">
+                <a href="{% url 'web:add-event' %}" class="block">Create Events</a>
+            </li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">
+                <a href="#" class="block">Help Center</a>
+            </li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">
+                <a href="#" class="block">Find my tickets</a>
+            </li>            
             <li class="font-[600] cursor-pointer hover:text-blue-500 transition">
                 <a href="{% url 'web:login' %}">Log In</a>
             </li>
@@ -43,7 +49,7 @@
     
         <!-- Mobile Menu -->
         <ul id="mobileMenu" class="absolute top-full left-0 w-full bg-white shadow-lg hidden flex-col space-y-4 px-5 py-5 md:hidden z-10">
-            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find Events</li>
+            <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Create Events</li>
             <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Help Center</li>
             <li class="font-[600] cursor-pointer hover:text-blue-500 transition">Find my tickets</li>
             <li class="font-[600] cursor-pointer hover:text-blue-500 transition">

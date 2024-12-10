@@ -34,6 +34,59 @@
     {% endfor %}
 </div>
 
+<div class="w-full border-t-[1px] mt-[50px]">
+  <div class="max-w-6xl mx-auto mt-[50px]">
+    <!-- Header -->
+    <nav class="flex space-x-4 text-lg font-semibold text-gray-700 mb-[100px]">
+      <a href="#" class="border-b-2 border-blue-500 text-blue-600 pb-1">All</a>
+      <a href="#" class="hover:text-blue-600">For you</a>
+      <a href="#" class="hover:text-blue-600">Online</a>
+      <a href="#" class="hover:text-blue-600">Today</a>
+      <a href="#" class="hover:text-blue-600">This weekend</a>
+      <a href="#" class="hover:text-blue-600">Free</a>
+      <a href="#" class="hover:text-blue-600">Music</a>
+      <a href="#" class="hover:text-blue-600">Food & Drink</a>
+      <a href="#" class="hover:text-blue-600">Charity & Causes</a>
+    </nav>
+  
+    <!-- Title -->
+    <h1 class="text-2xl font-bold text-gray-800 mt-6">Events in Trichūr</h1>
+  
+    <!-- Slider Container -->
+    <div class="relative">
+      <!-- Slider Wrapper -->
+      <div id="slider" class="flex space-x-4 overflow-x-auto scrollbar-hide">
+        {% for Project in projects %}
+        <!-- Card 1 -->
+        <div class="min-w-[300px] bg-white rounded-lg shadow p-4">
+          <img src="{{ Project.image.url }}" alt="Event 1" class="rounded-lg">
+          <h2 class="text-lg font-semibold mt-1">{{ Project.name }}</h2>
+          <p class="text-gray-600 text-sm mt-1">{{ Project.date_time }}</p>
+          <p class="text-sm font-bold text-gray-700">{{ Project.place }}</p>
+        </div>
+        {% endfor %}
+      </div>
+
+  
+    </div>
+  </div>
+  
+  <!-- JavaScript -->
+  <script>
+    const slider = document.getElementById('slider');
+    const next = document.getElementById('next');
+    const prev = document.getElementById('prev');
+  
+    next.addEventListener('click', () => {
+      slider.scrollBy({ left: 300, behavior: 'smooth' });
+    });
+  
+    prev.addEventListener('click', () => {
+      slider.scrollBy({ left: -300, behavior: 'smooth' });
+    });
+  </script>
+</div>
+
 <footer class="bg-purple-900 text-white py-8 mt-[150px]">
     <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <!-- Use Eventbrite Column -->
@@ -110,3 +163,4 @@
 
     
 {% endblock %}
+

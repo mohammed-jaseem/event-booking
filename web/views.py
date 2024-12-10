@@ -8,10 +8,12 @@ from .models import *
 def index(request):
     slideries = Slider.objects.all()
     events = Event.objects.all()
+    projects = Project.objects.all()
 
     context = {
        'slideries': slideries,
-       'events': events 
+       'events': events,
+       'projects': projects
     }
     return render(request, 'web/index.html', context=context)
 
@@ -19,9 +21,12 @@ def index(request):
 def single_event(request,id):
     events = Event.objects.get(id=id)
     tips = Tip.objects.filter(event=events)
+    projects = Project.objects.all()
+
     context = {
         'tips': tips,
-        'events': events
+        'events': events,
+        'projects': projects
     }
     
     return render(request, 'web/single-event.html', context=context)
@@ -81,4 +86,28 @@ def logout(request):
     auth_logout(request)
 
     return HttpResponseRedirect(reverse('web:login'))
+
+def add_event(request):
+    return render(request, 'web/add-event.html')
+
+def form(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        short_description = request.POST.get('short_description')
+        place = request.POST.get('place')
+        Participant = request.POST.get('Participant')
+        phone = request.POST.get('phone')
+
+        form = Form.objects.create_form(
+            name=name, 
+            short_description=short_description,
+            place=place,
+            Participant=Participant,
+            phone=phone, 
+        )
+        
+        form.save()
+    return render(request, 'web/form.html')
+
+
     

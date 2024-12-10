@@ -1,0 +1,51 @@
+{% extends 'base/web-base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+{% include 'include/header.html' %}
+  <!-- Navbar -->
+  <header class="bg-[#2C0443] py-4 px-6">
+    <div class="container mx-auto flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-[#fff]">Organizer</h1>
+      <nav class="hidden md:flex space-x-6 text-sm font-medium">
+        <a href="#" class="text-gray-300">Solutions</a>
+        <a href="#" class="text-gray-300">Industry</a>
+        <a href="#" class="text-gray-300">Event Types</a>
+        <a href="#" class="text-gray-300">Blog</a>
+        <a href="#" class="text-gray-300">Organizer Resource Hub</a>
+        <a href="#" class="text-gray-300">Pricing</a>
+      </nav>
+      <div class="hidden md:flex space-x-4">
+        <button class="bg-transparent border border-white py-2 px-4 text-[#fff] rounded-md hover:bg-white hover:text-[#2C0443]">
+          Contact Sales
+        </button>
+        <button class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative">
+    <div class="relative">
+      <!-- Background Image -->
+      <img src="/static/images/bg.png" alt="Event Image" class="w-full h-[500px] object-cover">
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#2C0443] to-transparent"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white px-6">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Where Event Organizers Grow</h1>
+      <p class="text-lg md:text-xl mb-6">
+        The all-in-one ticketing and discovery platform trusted by millions of organizers and attendees worldwide.
+      </p>
+      <a href="{% url 'web:form' %}" class="bg-orange-500 text-white py-3 px-6 rounded-md font-medium hover:bg-orange-600">
+        Get started for free
+      </a>
+    </div>
+  </section>
+{% endblock %}

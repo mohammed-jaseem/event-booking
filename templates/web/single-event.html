@@ -59,6 +59,43 @@
     </div>
   </div>
 
+
+   <!-- Title -->
+   <h1 class="text-2xl font-bold text-gray-800 mt-[80px] px-5">Events in Trichūr</h1>
+  
+   <!-- Slider Container -->
+   <div class="relative px-5">
+     <!-- Slider Wrapper -->
+     <div id="slider" class="flex space-x-4 overflow-x-auto scrollbar-hide">
+       {% for Project in projects %}
+       <!-- Card 1 -->
+       <div class="min-w-[300px] bg-white rounded-lg shadow p-4">
+         <img src="{{ Project.image.url }}" alt="Event 1" class="rounded-lg">
+         <h2 class="text-lg font-semibold mt-1">{{ Project.name }}</h2>
+         <p class="text-gray-600 text-sm mt-1">{{ Project.date_time }}</p>
+         <p class="text-sm font-bold text-gray-700">{{ Project.place }}</p>
+       </div>
+       {% endfor %}
+     </div>
+   </div>
+ </div>
+ 
+ <!-- JavaScript -->
+ <script>
+   const slider = document.getElementById('slider');
+   const next = document.getElementById('next');
+   const prev = document.getElementById('prev');
+ 
+   next.addEventListener('click', () => {
+     slider.scrollBy({ left: 300, behavior: 'smooth' });
+   });
+ 
+   prev.addEventListener('click', () => {
+     slider.scrollBy({ left: -300, behavior: 'smooth' });
+   });
+ </script>
+</div>
+
   <div class="my-6 mt-[150px] mb-[150px]">
     <!-- Title -->
     <h2 class="text-lg md:text-2xl font-bold text-gray-900 mb-[30px] px-4">

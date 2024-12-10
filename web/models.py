@@ -1,6 +1,17 @@
 from django.db import models
 from users.models import User
 
+EVENT_TYPE_CHOICES = (
+    ('Food & Drink','Food & Drink'),
+    ('Business','Business'),
+    ('Hobbies','Hobbies'),
+    ('Dating','Dating'),
+    ('Holidays','Holidays'),
+    ('Performing & Visual Arts','Performing & Visual Arts'),
+    ('Nightlife','Nightlife'),
+    ('Music Icon','Music')
+
+)
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -76,3 +87,39 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Project(models.Model):
+    image = models.ImageField(upload_to="booking_project")
+    name = models.CharField(max_length=225)
+    date_time = models.DateTimeField()
+    place = models.CharField(max_length=225)
+
+    class Meta:
+        db_table = "project"
+        verbose_name = "project"
+        verbose_name_plural = "projects"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
+    
+class Form(models.Model):
+    event_type = models.CharField(max_length=255,choices=EVENT_TYPE_CHOICES)
+    short_description = models.CharField(max_length=255)
+    place = models.CharField(max_length=225)
+    Participant = models.IntegerField()
+    phone = models.IntegerField()
+    image = models.ImageField()
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+
+    class Meta:
+        db_table = "form"
+        verbose_name = "form"
+        verbose_name_plural = "forms"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
+
+
