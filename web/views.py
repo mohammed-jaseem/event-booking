@@ -22,22 +22,17 @@ def single_event(request,id):
     events = Event.objects.get(id=id)
     tips = Tip.objects.filter(event=events)
     projects = Project.objects.all()
+    forms = Form.objects.filter(name=events)
 
     context = {
         'tips': tips,
         'events': events,
-        'projects': projects
+        'projects': projects,
+        'forms': forms,
+
     }
     
     return render(request, 'web/single-event.html', context=context)
-
-@login_required(login_url='/login')
-def booking(request):
-    categories = Category.objects.all()
-    context = {
-        'categories': categories
-    }
-    return render(request, 'web/booking.html', context=context)
 
 def login(request):
     if request.method == 'POST':
@@ -91,23 +86,35 @@ def add_event(request):
     return render(request, 'web/add-event.html')
 
 def form(request):
+    user =request.user
+    customer = Customer.objects.get(user=user)
+    events = Event.objects.all()
+
     if request.method == 'POST':
-        name = request.POST.get('name')
+        event_id = request.POST.get('event_type')
+        name = Event.objects.get(id=event_id)
         short_description = request.POST.get('short_description')
         place = request.POST.get('place')
         Participant = request.POST.get('Participant')
         phone = request.POST.get('phone')
+        image = request.FILES.get('image')
 
-        form = Form.objects.create_form(
+        form = Form.objects.create(
             name=name, 
             short_description=short_description,
             place=place,
             Participant=Participant,
-            phone=phone, 
+            phone=phone,    
+            image=image,
         )
         
         form.save()
-    return render(request, 'web/form.html')
+
+    context = {
+        'customer': customer,
+        'events': events,
+    }
+    return render(request, 'web/form.html', context=context)
 
 
     

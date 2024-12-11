@@ -9,28 +9,24 @@
 <div class="min-h-screen flex items-center justify-center px-4">
     <div class="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
       <h1 class="text-2xl font-bold text-gray-800 mb-4">Create an Event</h1>
-      <form id="eventForm" class="space-y-4">
+      <form id="eventForm" method="POST" enctype="multipart/form-data" class="">
+        {% csrf_token %}
         <!-- Event Name -->
         <div class="from-group">
           <label for="event_type">Event Type</label>
           <select name="event_type" id="event_type">
-              <option value="home">Food & Drink</option>
-              <option value="work">Business</option>
-              <option value="work">Hobbies</option>
-              <option value="work">Dating</option>
-              <option value="work">Holidays</option>
-              <option value="work">Performing & Visual Arts</option>
-              <option value="work">Nightlife</option>
-              <option value="work">Music</option>
+            {% for event in events %}
+              <option value="{{ event.id }}">{{ event.name }}</option>
+            {% endfor %}
           </select>
      </div>
         
         <!-- Description -->
         <div>
-          <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+          <label for="short_description" class="block text-sm font-medium text-gray-700">Description</label>
           <textarea
-            id="description"
-            name="description"
+            id="short_description"
+            name="short_description"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter event description"
             required
@@ -42,8 +38,8 @@
           <label for="venue" class="block text-sm font-medium text-gray-700">Venue</label>
           <input
             type="text"
-            id="venue"
-            name="venue"
+            id="place"
+            name="place"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter venue"
             required
@@ -55,8 +51,20 @@
           <label for="maxParticipants" class="block text-sm font-medium text-gray-700">Max Participants</label>
           <input
             type="number"
-            id="maxParticipants"
-            name="maxParticipants"
+            id="Participant"
+            name="Participant"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter maximum participants"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="maxParticipants" class="block text-sm font-medium text-gray-700">Phone Number</label>
+          <input
+            type="number"
+            id="phone"
+            name="phone"
             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="Enter maximum participants"
             required
@@ -68,8 +76,8 @@
           <label for="eventImage" class="block text-sm font-medium text-gray-700">Event Image</label>
           <input
             type="file"
-            id="eventImage"
-            name="eventImage"
+            id="image"
+            name="image"
             class="mt-1 block w-full text-gray-700 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             accept="image/*"
           />

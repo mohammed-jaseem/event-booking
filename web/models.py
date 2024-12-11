@@ -1,17 +1,6 @@
 from django.db import models
 from users.models import User
 
-EVENT_TYPE_CHOICES = (
-    ('Food & Drink','Food & Drink'),
-    ('Business','Business'),
-    ('Hobbies','Hobbies'),
-    ('Dating','Dating'),
-    ('Holidays','Holidays'),
-    ('Performing & Visual Arts','Performing & Visual Arts'),
-    ('Nightlife','Nightlife'),
-    ('Music Icon','Music')
-
-)
 
 class Customer(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -104,13 +93,12 @@ class Project(models.Model):
         return self.name
     
 class Form(models.Model):
-    event_type = models.CharField(max_length=255,choices=EVENT_TYPE_CHOICES)
+    name = models.ForeignKey(Event, on_delete=models.CASCADE)
     short_description = models.CharField(max_length=255)
     place = models.CharField(max_length=225)
     Participant = models.IntegerField()
     phone = models.IntegerField()
     image = models.ImageField()
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
 
     class Meta:
@@ -120,6 +108,6 @@ class Form(models.Model):
         ordering = ["-id"]
 
     def __str__(self):
-        return self.name
+        return self.name.name
 
 

@@ -1,76 +1,122 @@
-{% extends 'base/web-base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
 
-{% load static %}
+  <!-- Booking Page Container -->
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
+      <h1 class="text-3xl font-bold text-indigo-600 mb-6 text-center">Book Your Slot</h1>
 
-{% block container %}
-
-{% include 'include/header.html' %}
-
-<main class="container mx-auto my-10 p-5 bg-white rounded-lg shadow-md">
-    <h2 class="text-3xl font-semibold mb-6 text-center">Book Your Event</h2>
-    <form id="bookingForm" class="space-y-6">
+      <!-- Booking Form -->
+      <form id="bookingForm" class="space-y-6">
+        <!-- Name -->
         <div>
-            <label for="userName" class="block text-lg font-medium">Your Name</label>
-            <input type="text" id="userName" name="userName" class="w-full p-3 border rounded-lg" placeholder="Enter your name" required>
+          <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter your name"
+            required
+          />
         </div>
 
+        <!-- Email -->
         <div>
-            <label for="userPhone" class="block text-lg font-medium">Phone Number</label>
-            <input type="tel" id="userPhone" name="userPhone" class="w-full p-3 border rounded-lg" placeholder="Enter your phone number" required>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter your email"
+            required
+          />
         </div>
 
+        <!-- Date -->
         <div>
-            <label for="userPlace" class="block text-lg font-medium">Place</label>
-            <input type="text" id="userPlace" name="userPlace" class="w-full p-3 border rounded-lg" placeholder="Enter your place" required>
+          <label for="date" class="block text-sm font-medium text-gray-700">Booking Date</label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
         </div>
 
+        <!-- Time -->
         <div>
-            <label for="eventName" class="block text-lg font-medium">Event Name</label>
-            <input type="text" id="eventName" name="eventName" class="w-full p-3 border rounded-lg" placeholder="Enter event name" required>
+          <label for="time" class="block text-sm font-medium text-gray-700">Booking Time</label>
+          <input
+            type="time"
+            id="time"
+            name="time"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
+          />
         </div>
 
+        <!-- Number of Participants -->
         <div>
-            <label for="eventDate" class="block text-lg font-medium">Event Date</label>
-            <input type="date" id="eventDate" name="eventDate" class="w-full p-3 border rounded-lg" required>
+          <label for="participants" class="block text-sm font-medium text-gray-700">Number of Participants</label>
+          <input
+            type="number"
+            id="participants"
+            name="participants"
+            min="1"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Enter number of participants"
+            required
+          />
         </div>
 
-        <div>
-            <label for="tickets" class="block text-lg font-medium">Number of Tickets</label>
-            <input type="number" id="tickets" name="tickets" class="w-full p-3 border rounded-lg" min="1" placeholder="Enter number of tickets" required>
+        <!-- Price -->
+        <div class="flex items-center justify-between">
+          <span class="text-gray-700 font-medium">Total Price:</span>
+          <span id="totalPrice" class="text-indigo-600 font-bold">$0.00</span>
         </div>
 
+        <!-- Submit Button -->
         <div>
-            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition">
-                Book Now
-            </button>
+          <button
+            type="submit"
+            class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+          >
+            Confirm Booking
+          </button>
         </div>
-    </form>
-</main>
+      </form>
+    </div>
+  </div>
 
-<div id="successMessage" class="hidden container mx-auto text-center p-5 bg-green-500 text-white rounded-lg shadow-md">
-    Your booking is confirmed!
-</div>
+  <!-- JavaScript -->
+  <script>
+    const participantsInput = document.getElementById('participants');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const PRICE_PER_PARTICIPANT = 50; // Price per participant in USD
 
-<script>
-    document.getElementById('bookingForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const userName = document.getElementById('userName').value;
-        const userPhone = document.getElementById('userPhone').value;
-        const userPlace = document.getElementById('userPlace').value;
-        const eventName = document.getElementById('eventName').value;
-        const eventDate = document.getElementById('eventDate').value;
-        const tickets = document.getElementById('tickets').value;
-
-        if (userName && userPhone && userPlace && eventName && eventDate && tickets > 0) {
-            document.getElementById('successMessage').classList.remove('hidden');
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.add('hidden');
-            }, 5000);
-
-            document.getElementById('bookingForm').reset();
-        }
+    participantsInput.addEventListener('input', () => {
+      const participants = parseInt(participantsInput.value) || 0;
+      const totalPrice = participants * PRICE_PER_PARTICIPANT;
+      totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
     });
-</script>
 
-{% endblock %}
+    const bookingForm = document.getElementById('bookingForm');
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Your booking has been successfully submitted!');
+      bookingForm.reset();
+      totalPriceElement.textContent = '$0.00';
+    });
+  </script>
+</body>
+</html>
