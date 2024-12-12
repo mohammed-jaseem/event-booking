@@ -11,5 +11,8 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("add-event/", views.add_event, name="add-event"),
     path("form/", views.form, name="form"),
-    
+    path("booking/", views.booking, name="booking"),
+    path("booking-success/", views.booking_success, name="booking_success"),
+
+
     ]

@@ -77,6 +77,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+
 class Project(models.Model):
     image = models.ImageField(upload_to="booking_project")
     name = models.CharField(max_length=225)
@@ -91,6 +92,7 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+    
     
 class Form(models.Model):
     name = models.ForeignKey(Event, on_delete=models.CASCADE)
@@ -109,5 +111,27 @@ class Form(models.Model):
 
     def __str__(self):
         return self.name.name
+    
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="bookings")
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    place = models.CharField(max_length=255)
+    date = models.DateField()
+    time = models.TimeField()
+    participants = models.PositiveIntegerField()
+    requirements = models.TextField(blank=True, null=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+
+
+    class Meta:
+        db_table = "booking"
+        verbose_name = "booking"
+        verbose_name_plural = "bookings"
+        ordering = ["-id"]
+
+    def __str__(self):
+        return self.name
 
 

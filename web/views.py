@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login as auth_login,logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -24,6 +24,7 @@ def single_event(request,id):
     projects = Project.objects.all()
     forms = Form.objects.filter(name=events)
 
+    
     context = {
         'tips': tips,
         'events': events,
@@ -81,10 +82,10 @@ def logout(request):
     auth_logout(request)
 
     return HttpResponseRedirect(reverse('web:login'))
-
+@login_required(login_url='/login')
 def add_event(request):
     return render(request, 'web/add-event.html')
-
+@login_required(login_url='/login')
 def form(request):
     user =request.user
     customer = Customer.objects.get(user=user)
@@ -115,6 +116,51 @@ def form(request):
         'events': events,
     }
     return render(request, 'web/form.html', context=context)
+
+@login_required
+def booking(request):
+
+    if request.method == "POST":
+        name = request.POST.get("name")
+        email = request.POST.get("email")
+        place = request.POST.get("place")
+        date = request.POST.get("date")
+        time = request.POST.get("time")
+        participants = int(request.POST.get("participants"))
+        requirements = request.POST.get("requirements", "")
+
+
+        PRICE_PER_PARTICIPANT = 50
+        total_price = participants * PRICE_PER_PARTICIPANT
+
+
+        Booking.objects.create(
+            user=request.user,
+            name=name,
+            email=email,
+            place=place,
+            date=date,
+            time=time,
+            participants=participants,
+            requirements=requirements,
+            total_price=total_price,
+        )
+
+        return redirect("web:booking_success")
+    return render(request, "web/booking.html")
+
+@login_required(login_url='/login')
+def booking_success(request):
+    user = request.user
+    bookings = Booking.objects.filter(user=user)
+    events = Event.objects.get(id=2)
+
+
+    context ={
+        'bookings': bookings,
+        'events': events,
+    }
+    return render(request, "web/booking-success.html", context=context)
 
 
     

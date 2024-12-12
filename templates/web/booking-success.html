@@ -1,0 +1,47 @@
+{% extends 'base/web-base.html' %}
+
+{% load static %}
+
+{% block container %}
+
+{% include 'include/header.html' %}
+
+<div class="min-h-screen flex items-center justify-center px-4 mt-[50px]">
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-3xl w-full text-center">
+    <h1 class="text-3xl font-bold text-green-600 mb-4">Booking Successful!</h1>
+    <p class="text-gray-700 text-lg mb-6">
+      Thank you for booking with us. We look forward to serving you!
+    </p>
+
+    <!-- Display all bookings -->
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Bookings:</h2>
+    {% if bookings %}
+      <div class="space-y-4">
+        {% for booking in bookings %}
+          <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold text-gray-800">{{ booking.name }}</h3>
+            <p class="text-gray-600">Place: {{ booking.place }}</p>
+            <p class="text-gray-600">Date: {{ booking.date|date:"F j, Y" }}</p>
+            <p class="text-gray-600">Time: {{ booking.time|date:"g:i A" }}</p>
+            <p class="text-gray-600">Participants: {{ booking.participants }}</p>
+            <p class="text-gray-800 font-bold">Total Price: ${{ booking.total_price }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-gray-700">You have no bookings yet.</p>
+    {% endif %}
+
+    <!-- Redirect Buttons -->
+    <div class="flex justify-center gap-4 mt-6">
+      <a href="{% url 'web:single_event' id=events.id %}" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none transition duration-300">
+        Book Another Event
+      </a>
+      <a href="{% url 'web:index' %}" class="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none transition duration-300">
+        Return to Home
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
