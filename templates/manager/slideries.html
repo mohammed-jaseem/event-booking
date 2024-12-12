@@ -37,7 +37,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>IMAGE</th>
-                                        <th>RESTAURANT</th>
+                                        <th>TITLE</th>
                                     </tr>
                                 </thead>
                             <tbody>
@@ -45,7 +45,7 @@
                                 <tr>
                                     <td>{{instance.id}}</td>
                                     <td><img src="{{instance.image.url}}" alt="image" style="width: 70px;"></td>
-                                    <td>{{instance.restaurant}}</td>
+                                    <td>{{instance.title}}</td>
                                     <td><a href="{% url 'manager:edit_slideries' id=instance.id %}"><button type="button" class="btn mb-1 btn-primary">Edit</button></a></td>
                                     <td><a href="{% url 'manager:delete_slideries' id=instance.id %}"><button type="button" class="btn mb-1 btn-danger" >Delete</button></a></td>
                                 </tr>
